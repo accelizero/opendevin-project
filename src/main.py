@@ -18,7 +18,8 @@ class NightLightApp(MDApp):
         self.camera_id = self.get_camera_id()
 
     def get_camera_manager(self):
-        return self.get_system_service(Context.CAMERA_SERVICE)
+        activity = PythonActivity.mActivity
+        return activity.getSystemService(Context.CAMERA_SERVICE)
 
     def get_camera_id(self):
         camera_id_list = self.camera_manager.getCameraIdList()
