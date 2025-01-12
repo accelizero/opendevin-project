@@ -1,9 +1,9 @@
-from kivy.app import App
-from kivy.uix.label import Label
+from kivymd.app import MDApp
+from kivy.lang import Builder
 
-class HelloWorldApp(App):
+class HelloWorldApp(MDApp):
     def build(self):
-        return Label()
+        return Builder.load_file('helloworld.kv')
 
 if __name__ == '__main__':
     HelloWorldApp().run()
