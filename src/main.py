@@ -6,7 +6,7 @@ class NightLightApp(MDApp):
     brightness = NumericProperty(50)
 
     def build(self):
-        return Builder.load_file('nightlight.kv')
+        return Builder.load_file('helloworld.kv')
 
     def increase_brightness(self):
         if self.brightness < 100:
