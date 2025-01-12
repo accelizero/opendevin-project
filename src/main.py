@@ -4,6 +4,7 @@ from kivy.properties import NumericProperty
 from jnius import autoclass
 
 # Access Android classes
+PythonActivity = autoclass('org.kivy.android.PythonActivity')
 CameraManager = autoclass('android.hardware.camera2.CameraManager')
 Context = autoclass('android.content.Context')
 
