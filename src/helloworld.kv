@@ -1,5 +1,39 @@
-Screen:
+BoxLayout:
+    orientation: 'vertical'
+    padding: dp(20)
+    spacing: dp(20)
+
     MDLabel:
-        text: "Hello, World!"
+        text: "Night Light"
         halign: "center"
         theme_text_color: "Primary"
+        font_style: "H4"
+
+    MDIconButton:
+        icon: "lightbulb"
+        user_font_size: "64sp"
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.primary_color
+
+    MDSwitch:
+        id: light_switch
+        on_active: app.toggle_light
+
+    MDSlider:
+        id: brightness_slider
+        min: 0
+        max: 100
+        value: app.brightness
+        on_value: app.brightness = self.value
+
+    BoxLayout:
+        size_hint_y: None
+        height: self.minimum_height
+
+        MDRaisedButton:
+            text: "Increase Brightness"
+            on_release: app.increase_brightness()
+
+        MDRaisedButton:
+            text: "Decrease Brightness"
+            on_release: app.decrease_brightness()
