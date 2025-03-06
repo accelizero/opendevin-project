@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Audio to Text</title>
+    <script>
+        // Initialize variables
+let recognition;
+let isRecording = false;
+
+// Function to start recording
+function startRecording() {
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.onresult = function(event) {
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+            }
+            document.getElementById('transcript').innerText = transcript;
+        };
+        recognition.onerror = function(event) {
+            console.error('Error occurred:', event.error);
+        };
+        recognition.onend = function() {
+            if (isRecording) {
+                recognition.start();
+            }
+        };
+        recognition.start();
+        isRecording = true;
+        document.getElementById('startButton').disabled = true;
+        document.getElementById('stopButton').disabled = false;
+    } else {
+        alert('Speech recognition not supported in this browser.');
+    }
+}
+
+// Function to stop recording
+function stopRecording() {
+    if (recognition) {
+        recognition.stop();
+        isRecording = false;
+        document.getElementById('startButton').disabled = false;
+        document.getElementById('stopButton').disabled = true;
+    }
+}
+
+// Event listeners for buttons
+document.getElementById('startButton').addEventListener('click', startRecording);
+document.getElementById('stopButton').addEventListener('click', stopRecording);
+    </script>
+</head>
+<body>
+    <h1>Real-time Audio to Text</h1>
+    <button id="startButton">Start Recording</button>
+    <button id="stopButton" disabled>Stop Recording</button>
+    <div id="transcript"></div>
+</body>
+</html>
